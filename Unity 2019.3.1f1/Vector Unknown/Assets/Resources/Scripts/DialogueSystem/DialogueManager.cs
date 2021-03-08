@@ -34,6 +34,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Conversation conversation)
     {
+        // setup dialogue system
         dialogueWindow.gameObject.SetActive(true);
 
         isInDialogue = true;
@@ -74,6 +75,7 @@ public class DialogueManager : MonoBehaviour
         }
         //***********************************************************
 
+        // exit dialogue once all the characters in string are read
         if (dialogueIndex >= dialoguesSize)
         {
             EndDialogue();
@@ -121,9 +123,26 @@ public class DialogueManager : MonoBehaviour
         {
             GameRoot.instance.IsLock(false);
             Debug.Log("Unlock From Dialogue");
+
+            Debug.Log("Start Try");
+            // lock mouse
+            try
+            {
+                GameObject.Find("Main Camera").GetComponent<CameraController>().postPuzzleLock = true;
+                GameObject.Find("Main Camera").GetComponent<CameraController>().isLock = true;
+                Debug.Log("In Try");
+            }
+            catch { Debug.Log("In Catch"); }
+            Debug.Log("After Try Catch");
         }
 
         isInDialogue = false;
+
+        try
+        {
+            GameObject.Find("MainCamera").GetComponent<CameraController>().isLock = true;
+        }
+        catch { }
     }
 
     //Flags for puzzle01 dialogue

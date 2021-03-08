@@ -68,29 +68,16 @@ public class DatabasePuzzle02 : MonoBehaviour
         transforms5 = new transformMatrix[] { t21, t22, t23, t24 };
     }
 
+    // multiply given matrix by given vector and return result
     public int[] calculation(int[] vector, int[] matrix)
     {
-        int[] newVectore = new int[] { 0, 0 };
+        int[] result = { 0, 0 };
 
-        int[] originalVector = new int[] { 0, 0 };
-        originalVector = vector;
-
-        int[] transform = new int[] { 0, 0, 0, 0 };
-        transform = matrix;
-
-        //transform Matrix 
-        // 0,1
-        // 2,3
-        transform[0] = transform[0] * originalVector[0];
-        transform[2] = transform[2] * originalVector[0];
-        transform[1] = transform[1] * originalVector[1];
-        transform[3] = transform[3] * originalVector[1];
-
-        newVectore[0] = transform[0] + transform[1];
-        newVectore[1] = transform[2] + transform[3];
+        result[0] = matrix[0] * vector[0] + matrix[1] * vector[1];
+        result[1] = matrix[2] * vector[0] + matrix[3] * vector[1];
 
         refreshDatabase();
 
-        return newVectore;
+        return result;
     }
 }

@@ -27,12 +27,32 @@ public class WindowRoot : MonoBehaviour
     {
         resourceService = GameRoot.instance.resourceService;
         audioService = GameRoot.instance.audioService;
+        try
+        {
+            GameObject.Find("MainCamera").GetComponent<CameraController>().isLock = false;
+        }
+        catch { }
+        try
+        {
+            GameObject.Find("Main Camera").GetComponent<CameraController>().isLock = false;
+        }
+        catch { }
     }
 
     protected virtual void ClearWindow()
     {
         resourceService = null;
         audioService = null;
+        try
+        {
+            GameObject.Find("MainCamera").GetComponent<CameraController>().isLock = true;
+        }
+        catch { }
+        try
+        {
+            GameObject.Find("Main Camera").GetComponent<CameraController>().isLock = true;
+        }
+        catch { }
     }
 
     #region Common Tool Functions

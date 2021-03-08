@@ -180,6 +180,14 @@ public class GameControllerPuzzle01 : GameControllerRoot
 
                     //Dialogue manager can unlock the lock;
                     DialogueManager.isPuzzleLock = false;
+
+                    // lock mouse after leaving question and not finishing it
+                    try
+                    {
+                        GameObject.Find("MainCamera").GetComponent<CameraController>().isLock = true;
+                        Debug.Log("mouse locked");
+                    }
+                    catch { }
                 }
             }
 

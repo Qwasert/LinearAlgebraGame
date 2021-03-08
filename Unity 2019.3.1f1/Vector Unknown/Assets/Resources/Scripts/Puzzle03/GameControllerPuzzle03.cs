@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameControllerPuzzle03 : GameControllerRoot
 {
+    // Found at 68, 1, -12 in hub
+
     public Camera[] topCameraList;
     public float rotatedSpeed = 1f;
     public Transform plane;
@@ -76,11 +78,15 @@ public class GameControllerPuzzle03 : GameControllerRoot
         //Initilize Components
         plane = DBP03.subLevelPlanes[0];
         topCamera = topCameraList[0];
-        P03W.SetInstructionalText("Choose from these vector options to create a span. The floor will imitate this span which will roll the ball.");
+        P03W.SetInstructionalText("Choose a number to assign 'b' a new value. The environment will then imitate the newly generated span.");
     }
 
     private void Update()
     {
+        if(choicesAmount == 0)
+        {
+            SetSpanValue(Vector3.right, 5);
+        }
         
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -284,7 +290,7 @@ public class GameControllerPuzzle03 : GameControllerRoot
 
         GameRoot.instance.IsLock(false);
         P03W.ShowChoicePanel(false);
-        P03W.ClearSpanValues();
+        P03W.ClearSpanValues("test2", "test2");
         P03W.ClearFeedbackPanel();
         isTriggerQuestion = false;
 

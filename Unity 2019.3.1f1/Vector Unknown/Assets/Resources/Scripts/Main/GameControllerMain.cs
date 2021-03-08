@@ -3,10 +3,12 @@
 public class GameControllerMain : GameControllerRoot
 {
     [Header("Player & Camera")]
-    public Transform PCFromPuzzle01;
+
+    //*** Player Transforms to spawn into area right outside the puzzle commented LaQuez
+    public Transform PCFromPuzzle01; 
     public Transform PCFromPuzzle02;
     public Transform PCFromPuzzle03;
-
+    //*****
     public Transform sunLight;
     public Transform moonLight;
     public LPWAsset.LowPolyWaterScript ocean;
@@ -33,6 +35,8 @@ public class GameControllerMain : GameControllerRoot
         player = GameObject.FindGameObjectWithTag("Player").transform;
         startPosition = player.transform.position;
 
+
+        //*** Switch case to control where the player spawns after completeing the puzzles
         switch (GameRoot.instance.exitPuzzle)
         { 
             case 1:
@@ -64,10 +68,11 @@ public class GameControllerMain : GameControllerRoot
             }
 
             //Set the instructional text and check image
-            MW.SetInstructionText("Find & enter the cave to beat the pirates.");
+           // MW.SetInstructionText("Find & enter the cave to beat the pirates."); // original
+            MW.SetInstructionText("Explore the land and find what else might be out there"); //added by LaQuez
             MW.SetCheckImage(0, spriteChecks[0]);
         }
-        //If player finish puzzle 01 & puzzle 02
+        //If player finish puzzle 01 & puzzle 02 turn sky into night
         else if(GameRoot.instance.puzzleCompleted[0] == true && GameRoot.instance.puzzleCompleted[1] == true)
         {
             SetActive(sunLight, false);
@@ -83,7 +88,7 @@ public class GameControllerMain : GameControllerRoot
                 DialogueManager.showM_01 = false;
             }
 
-            MW.SetInstructionText("Find & enter the pirates' hideout to save villagers.");
+            MW.SetInstructionText("Find & enter the pirates' hideout to save villagers.");          
             MW.SetCheckImage(0, spriteChecks[0]);
             MW.SetCheckImage(1, spriteChecks[1]);
         }

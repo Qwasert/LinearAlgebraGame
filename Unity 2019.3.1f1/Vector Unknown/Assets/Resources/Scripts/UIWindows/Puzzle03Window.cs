@@ -45,7 +45,7 @@ public class Puzzle03Window : WindowRoot
         GCP03 = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControllerPuzzle03>();
         GCP03.InitGameController(this);
 
-        ClearSpanValues();
+        ClearSpanValues("", "");
         ClearFeedbackPanel();
     }
 
@@ -64,7 +64,7 @@ public class Puzzle03Window : WindowRoot
         }
         else if (choiceID2 == 0)
         {
-            txtChoice2.text = spanValue[0] + "\n" + spanValue[1] + "\n" + spanValue[2];
+            txtChoice2.text = spanValue[0] + "\n" + spanValue[1] + "\n<color=red>" + spanValue[2] + "</color>";
             choiceID2 = choiceID;
             choice2Pos = spanValue;
         }
@@ -79,26 +79,26 @@ public class Puzzle03Window : WindowRoot
         GCP03.TriggerRotation(choiceID1, choiceID2, choice1Pos, choice2Pos);
 
         //Show the span value in input panel
-        if(choiceID1 != 0 && choiceID2 != 0)
+        /*if(choiceID1 != 0 && choiceID2 != 0)
         {
             txtFBChoice1.text = choice1Pos.x + "\n" + choice1Pos.y + "\n" + choice1Pos.z;
             txtFBChoice2.text = choice2Pos.x + "\n" + choice2Pos.y + "\n" + choice2Pos.z;
-        }
+        }*/
 
-        ClearSpanValues();
+        ClearSpanValues(txtFBChoice1.text, txtChoice2.text);
 
         GameRoot.instance.audioService.PlayUIAudio(Constants.audioP03Click);
     }
 
     public void ClickClearChoice1Btn()
-    {
+    {/*
         GCP03.ReactivateChoiceBtn(choiceID1);
         txtChoice1.text = "";
         choiceID1 = 0;
         choice1Pos = Vector3.zero;
 
 
-        GameRoot.instance.audioService.PlayUIAudio(Constants.audioP03ClickClear);
+        GameRoot.instance.audioService.PlayUIAudio(Constants.audioP03ClickClear);*/
     }
 
     public void ClickClearChoice2Btn()
@@ -113,16 +113,17 @@ public class Puzzle03Window : WindowRoot
 
     public void ClearFeedbackPanel()
     {
-        txtFBChoice1.text = "";
-        txtFBChoice2.text = "";
+        txtFBChoice1.text = "1\n0\n0";
+        txtFBChoice2.text = "0\n1\n<color=red>b</color>";
     }
 
-    public void ClearSpanValues()
+
+    public void ClearSpanValues(string choice1, string choice2)
     {
         GCP03.ReactivateChoiceBtn(choiceID1);
         GCP03.ReactivateChoiceBtn(choiceID2);
-        txtChoice1.text = "";
-        txtChoice2.text = "";
+        txtChoice1.text = choice1;
+        txtChoice2.text = choice2;
         choiceID1 = 0;
         choiceID2 = 0;
         choice1Pos = Vector3.zero;

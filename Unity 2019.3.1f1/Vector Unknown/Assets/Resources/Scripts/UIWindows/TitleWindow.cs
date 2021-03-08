@@ -19,6 +19,12 @@ public class TitleWindow : WindowRoot
         SetBgVolume();
 
         SetSoundFXVolume();
+
+        // show mouse
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+
         //Initialize Resolution Dropdown
         /*
         resolutions = Screen.resolutions;
@@ -58,7 +64,14 @@ public class TitleWindow : WindowRoot
         DialogueManager.instance.ResetAll();
 
         audioService.PlayUIAudio(Constants.audioUIStartBtn);
-        GameRoot.instance.puzzleSystem.EnterPuzzle(Constants.puzzle01SceneName);
+        //GameRoot.instance.puzzleSystem.EnterPuzzle(Constants.puzzle01SceneName);// original  
+        GameRoot.instance.puzzleSystem.EnterPuzzle(Constants.mainSceneName);//added by LaQuez Brown 
+        
+
+        // hides mouse when loading game
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     public void ClickTutorialBtn()
